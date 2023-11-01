@@ -159,6 +159,7 @@ class Boy:
         self.image = load_image('animation_sheet.png')
         self.state_machine = StateMachine(self)
         self.state_machine.start()
+        self.item = None
 
     def fire_ball(self):
 
@@ -169,6 +170,12 @@ class Boy:
         #
         # elif self.face_dir == 1:
         #     print('FIRE BALL RIGHT')
+        if self.item == 'Ball':
+            ball = Ball(self.x, self.y, self.face_dir * 10)
+            game_world.add_object(ball)
+        elif self.item == 'BigBall':
+            ball = BigBall(self.x, self.y, self.face_dir * 10)
+            game_world.add_object(ball)
 
         pass
 
