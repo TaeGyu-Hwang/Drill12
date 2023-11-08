@@ -9,6 +9,7 @@ from boy import Boy
 from ball import Ball
 from zombie import Zombie
 
+
 # boy = None
 
 def handle_events():
@@ -34,9 +35,6 @@ def init():
     game_world.add_object(boy, 1)
     game_world.add_collision_pair('boy:ball', boy, None)
 
-    zombie = Zombie()
-    game_world.add_object(zombie, 1)
-
     # fill here
     # 공을 바닥에 30개 뿌린다.
     balls = [Ball(random.randint(100, 1500), 60, 0) for _ in range(30)]
@@ -44,6 +42,12 @@ def init():
 
     for ball in balls:
         game_world.add_collision_pair('boy:ball', None, ball)
+
+    zombies = [Zombie() for _ in range(5)]
+    game_world.add_objects(zombies, 1)
+    for zombie in zombies:
+        game_world.add_collision_pair('boy:zombie', boy, zombie)
+
 
 
 def finish():

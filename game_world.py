@@ -1,3 +1,8 @@
+import game_framework
+from ball import Ball
+from boy import Boy
+
+
 objects = [[] for _ in range(4)]
 
 # fill here
@@ -77,4 +82,7 @@ def handle_collisions():
                 if collide(a, b):
                     a.handle_collision(group, b)
                     b.handle_collision(group, a)
+                    # 소년과 좀비의 충돌 로직
+                    if 'zombie' in group and isinstance(a, Boy):
+                        game_framework.quit()  # 게임 종료
     return None

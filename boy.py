@@ -194,8 +194,9 @@ class Boy:
     def fire_ball(self):
         if self.ball_count > 0:
             self.ball_count -= 1
-            ball = Ball(self.x, self.y, self.face_dir*10)
+            ball = Ball(self.x, self.y, self.face_dir*10, is_fired=True)
             game_world.add_object(ball)
+            game_world.add_collision_pair('fire_ball:zombie', None, ball)
 
     def update(self):
         self.state_machine.update()
@@ -215,4 +216,6 @@ class Boy:
     def handle_collision(self, group, other):
         if group == 'boy:ball':
             self.ball_count += 1
+        if group == 'boy:zombie':
+            game_framework.quit()  # 게임 종료
 
