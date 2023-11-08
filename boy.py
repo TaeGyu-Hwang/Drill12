@@ -206,8 +206,13 @@ class Boy:
     def draw(self):
         self.state_machine.draw()
         self.font.draw(self.x-10, self.y + 50, f'{self.ball_count:02d}', (255, 255, 0))
-        draw_rectangle(*self.get_bb())
+        draw_rectangle(*self.get_bb()) # 튜플로 풀어해쳐서 분리해서 인자로 제공.
 
     # fill here
     def get_bb(self):
-        return self.x - 25, self.y - 40, self.x + 25, self.y + 40
+        return self.x - 20, self.y - 40, self.x + 20, self.y + 40 # 4개의 값을 하나의 튜플로
+
+    def handle_collision(self, group, other):
+        if group == 'boy:ball':
+            self.ball_count += 1
+
